@@ -1,0 +1,10 @@
+#pragma once
+
+namespace erg::gfx {
+    class IBindable {
+    public:
+        virtual ~IBindable() = default;
+
+        virtual void bind() = 0;
+    };
+} // erg::gfx
