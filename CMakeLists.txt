@@ -19,7 +19,9 @@ add_executable(cobblelands ext/glad/src/gl.c src/main.cc
         src/erg/gfx/vertex_array.cc
         src/erg/gfx/vertex_array.hh
         src/erg/gfx/buffer.cc
-        src/erg/gfx/buffer.hh)
+        src/erg/gfx/buffer.hh
+        src/erg/gfx/vertex_buffer.cc
+        src/erg/gfx/vertex_buffer.hh)
 
 add_subdirectory(ext/glfw)
 
