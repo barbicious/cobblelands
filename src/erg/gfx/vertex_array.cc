@@ -4,7 +4,7 @@
 
 namespace erg::gfx {
     VertexArray::VertexArray() : handle{} {
-        glGenVertexArrays(GL_VERTEX_ARRAY, &handle);
+        glGenVertexArrays(1, &handle);
     }
 
     void VertexArray::bind() {

@@ -1,5 +1,7 @@
 #include "buffer.hh"
 
+#include <iostream>
+
 #include "glad/gl.h"
 
 namespace erg::gfx {
@@ -10,5 +12,9 @@ namespace erg::gfx {
 
     void Buffer::bind() {
         glBindBuffer(buffer_target, handle);
+    }
+
+    u32 Buffer::getBufferTarget() const noexcept {
+        return buffer_target;
     }
 }

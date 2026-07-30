@@ -21,7 +21,15 @@ add_executable(cobblelands ext/glad/src/gl.c src/main.cc
         src/erg/gfx/buffer.cc
         src/erg/gfx/buffer.hh
         src/erg/gfx/vertex_buffer.cc
-        src/erg/gfx/vertex_buffer.hh)
+        src/erg/gfx/vertex_buffer.hh
+        src/erg/gfx/shader.cc
+        src/erg/gfx/shader.hh)
+
+add_custom_command(TARGET cobblelands POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/res
+        $<TARGET_FILE_DIR:cobblelands>/res
+)
 
 add_subdirectory(ext/glfw)
 

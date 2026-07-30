@@ -1,6 +1,5 @@
 #include "window.hh"
 
-#include <iostream>
 #include <stdexcept>
 
 #include "logger.hh"
@@ -55,7 +54,6 @@ namespace erg {
     }
 
     bool Window::isGood() const noexcept {
-        std::cout << width << ", " << height << std::endl;
         glfwPollEvents();
         return !glfwWindowShouldClose(handle);
     }
