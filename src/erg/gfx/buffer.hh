@@ -7,8 +7,11 @@ namespace erg::gfx {
     public:
         explicit Buffer(u32 buffer_target);
         void bind() override;
+        void unbind() override;
+
     protected:
-        u32 getBufferTarget() const noexcept;
+        [[nodiscard]] u32 getBufferTarget() const noexcept;
+
     private:
         u32 handle;
         u32 buffer_target;

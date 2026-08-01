@@ -10,4 +10,8 @@ namespace erg::gfx {
     void VertexArray::bind() {
         glBindVertexArray(handle);
     }
+
+    void VertexArray::unbind() {
+        glBindVertexArray(0);
+    }
 }

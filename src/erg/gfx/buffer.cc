@@ -14,6 +14,10 @@ namespace erg::gfx {
         glBindBuffer(buffer_target, handle);
     }
 
+    void Buffer::unbind() {
+        glBindBuffer(buffer_target, 0);
+    }
+
     u32 Buffer::getBufferTarget() const noexcept {
         return buffer_target;
     }

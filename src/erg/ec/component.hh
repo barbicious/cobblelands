@@ -9,9 +9,9 @@ namespace erg::ec {
 
         virtual ~Component() = default;
 
-        void setOwner(Entity *owner);
+        void setOwner(Entity* owner);
 
     private:
-        Entity *owner;
+        Entity* owner;
     };
 } // erg::ec

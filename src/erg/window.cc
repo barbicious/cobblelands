@@ -5,8 +5,8 @@
 #include "logger.hh"
 
 namespace erg {
-    static void framebufferSizeCallback(GLFWwindow *glfw_window, i32 width, i32 height) {
-        auto *window = reinterpret_cast<Window *>(glfwGetWindowUserPointer(glfw_window));
+    static void framebufferSizeCallback(GLFWwindow* glfw_window, const i32 width, const i32 height) {
+        auto* window = static_cast<Window*>(glfwGetWindowUserPointer(glfw_window));
 
         window->width = width;
         window->height = height;
@@ -14,7 +14,7 @@ namespace erg {
         glViewport(0, 0, window->width, window->height);
     }
 
-    Window::Window(const Config &config) : handle{nullptr}, width{config.width}, height{config.height} {
+    Window::Window(const Config& config) : handle{nullptr}, width{config.width}, height{config.height} {
         if (!glfwInit()) {
             Logger::fatal("Failed to init glfw");
         }
@@ -27,7 +27,7 @@ namespace erg {
         glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
 
-        GLFWwindow *handle{
+        GLFWwindow* handle{
             glfwCreateWindow(static_cast<i32>(config.width), static_cast<i32>(config.height), config.title.c_str(),
                              nullptr, nullptr)
         };
@@ -53,9 +53,17 @@ namespace erg {
         glfwDestroyWindow(handle);
     }
 
+    void Window::setPosition(const i32 x, const i32 y) const {
+        glfwSetWindowPos(handle, x, y);
+    }
+
     bool Window::isGood() const noexcept {
         glfwPollEvents();
         return !glfwWindowShouldClose(handle);
+    }
+
+    bool Window::getKey(const i32 key) const noexcept {
+        return glfwGetKey(handle, key);
     }
 
     void Window::display() const noexcept {

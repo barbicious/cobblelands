@@ -23,7 +23,19 @@ add_executable(cobblelands ext/glad/src/gl.c src/main.cc
         src/erg/gfx/vertex_buffer.cc
         src/erg/gfx/vertex_buffer.hh
         src/erg/gfx/shader.cc
-        src/erg/gfx/shader.hh)
+        src/erg/gfx/shader.hh
+        src/erg/gfx/texture.cc
+        src/erg/gfx/texture.hh
+        src/erg/gfx/image_texture.cc
+        src/erg/gfx/image_texture.hh
+        src/erg/inp/input_handler.cc
+        src/erg/inp/input_handler.hh
+        src/erg/inp/i_command.hh
+        src/erg/inp/input_binding.hh
+        src/erg/engine.cc
+        src/erg/engine.hh
+        src/erg/inp/keyboard.cc
+        src/erg/inp/keyboard.hh)
 
 add_custom_command(TARGET cobblelands POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory
@@ -33,6 +45,6 @@ add_custom_command(TARGET cobblelands POST_BUILD
 
 add_subdirectory(ext/glfw)
 
-target_include_directories(cobblelands PRIVATE ext/glad/include)
+target_include_directories(cobblelands PRIVATE ext/glad/include ext/stbi)
 
 target_link_libraries(cobblelands PRIVATE glfw)

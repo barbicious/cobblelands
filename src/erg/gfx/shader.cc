@@ -9,15 +9,19 @@
 #include "../logger.hh"
 
 namespace erg::gfx {
-    Shader::Shader(std::vector<Desc> descs) : handle{glCreateProgram()} {
+    Shader::Shader(std::array<const std::optional<const Desc>, 3> descs) : handle{glCreateProgram()} {
         std::stack<i32> shaders{};
 
-        for (const Desc& desc : descs) {
-            const u32 shader{glCreateShader(desc.type)};
+        for (const std::optional<Desc> desc: descs) {
+            if (!desc) {
+                continue;
+            }
+
+            const u32 shader{glCreateShader(desc->type)};
 
             std::ifstream file{};
             file.exceptions(std::ifstream::badbit | std::ifstream::failbit);
-            file.open(desc.path);
+            file.open(desc->path);
 
             std::stringstream shader_stream{};
             shader_stream << file.rdbuf();
@@ -33,7 +37,7 @@ namespace erg::gfx {
             i32 success{0};
             glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
             if (!success) {
-                std::array<char, 512> info_log{};
+                std::array < char, 512 > info_log{};
                 glGetShaderInfoLog(shader, info_log.size(), nullptr, info_log.data());
                 Logger::fatal(std::format("Failed to compile shader!\nError: {}", info_log.data()));
             }
@@ -53,7 +57,7 @@ namespace erg::gfx {
         i32 success{0};
         glGetProgramiv(handle, GL_LINK_STATUS, &success);
         if (!success) {
-            std::array<char, 512> info_log{};
+            std::array < char, 512 > info_log{};
             glGetProgramInfoLog(handle, info_log.size(), nullptr, info_log.data());
             Logger::fatal(std::format("Failed to link shader!\nError: {}", info_log.data()));
         }
@@ -65,5 +69,9 @@ namespace erg::gfx {
 
     void Shader::bind() {
         glUseProgram(handle);
+    }
+
+    void Shader::unbind() {
+        glUseProgram(0);
     }
 } // erg::gfx

@@ -14,18 +14,22 @@ namespace erg {
             std::string title;
         };
 
-        explicit Window(const Config &config);
+        explicit Window(const Config& config);
 
         ~Window();
 
+        void setPosition(i32 x, i32 y) const;
+
         bool isGood() const noexcept;
+
+        bool getKey(i32 key) const noexcept;
 
         void display() const noexcept;
 
-        friend void framebufferSizeCallback(GLFWwindow *glfw_window, i32 width, i32 height);
+        friend void framebufferSizeCallback(GLFWwindow* glfw_window, i32 width, i32 height);
 
     private:
-        GLFWwindow *handle;
+        GLFWwindow* handle;
         u32 width;
         u32 height;
     };

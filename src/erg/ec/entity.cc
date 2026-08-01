@@ -6,11 +6,11 @@ namespace erg::ec {
     void Entity::addComponent(std::unique_ptr<Component> component) {
         component->setOwner(this);
 
-        if (auto *blittable{dynamic_cast<IBlittable *>(component.get())}) {
+        if (auto* blittable{dynamic_cast<IBlittable*>(component.get())}) {
             blittables.push_back(blittable);
         }
 
-        if (auto *tickable{dynamic_cast<ITickable *>(component.get())}) {
+        if (auto* tickable{dynamic_cast<ITickable*>(component.get())}) {
             tickables.push_back(tickable);
         }
 
